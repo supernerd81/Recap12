@@ -12,9 +12,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -130,4 +128,19 @@ public class TodoControllerIntegrationTest {
         //THEN
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    @DirtiesContext
+    void deleteTodoById() throws Exception {
+        //GIVEN
+        Todo existingTodo = new Todo("1", "test-description", TodoStatus.OPEN);
+        todoRepository.save(existingTodo);
+
+        //WHEN
+        mockMvc.perform(delete("/api/todo/1"))
+
+        //THEN
+                .andExpect(status().isOk());
+    }
+
 }
