@@ -1,6 +1,7 @@
 package de.supernerd.recap12.controller;
 
 import de.supernerd.recap12.dto.NewTodo;
+import de.supernerd.recap12.dto.UpdateTodo;
 import de.supernerd.recap12.records.Todo;
 import de.supernerd.recap12.services.TodoService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class TodoController {
         return todoService.addTodo(newTodo);
     }
 
-    @DeleteMapping("/toto")
+    @DeleteMapping("/todo")
     public void delete(@RequestBody Todo todo) {
 
     }
@@ -30,4 +31,10 @@ public class TodoController {
 
         return todoService.findAllTodos();
     }
+
+    @PutMapping("/todo/{id}")
+    public Todo putTodo(@RequestBody UpdateTodo todo, @PathVariable String id) {
+        return todoService.updateTodo(todo, id);
+    }
+
 }

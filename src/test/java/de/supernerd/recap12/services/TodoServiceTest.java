@@ -1,6 +1,7 @@
 package de.supernerd.recap12.services;
 
 import de.supernerd.recap12.dto.NewTodo;
+import de.supernerd.recap12.dto.UpdateTodo;
 import de.supernerd.recap12.enums.TodoStatus;
 import de.supernerd.recap12.records.Todo;
 import de.supernerd.recap12.repository.TodoRepository;
@@ -51,5 +52,23 @@ class TodoServiceTest {
         verify(idService).randomId();
         verify(todoRepository).save(todoToSave);
         assertEquals(todoToSave, actual);
+    }
+
+    @Test
+    void updateTodo() {
+        //GIVEN
+        String id = "123";
+        UpdateTodo todoToUpdate = new UpdateTodo("test-description", "IN_PROGRESS");
+        Todo updatedToDo = new Todo("123", "test-description", "IN_PROGRESS");
+
+        //WHEN
+        when(todoRepository.save(updatedToDo)).thenReturn(updatedToDo);
+
+        Todo actual = todoService.updateTodo(todoToUpdate, id);
+
+        //THEN
+        verify(todoRepository).save(updatedToDo);
+
+        assertEquals(updatedToDo, actual);
     }
 }
