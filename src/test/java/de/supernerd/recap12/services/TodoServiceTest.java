@@ -22,9 +22,9 @@ class TodoServiceTest {
     @Test
     void findAllTodos() {
         //GIVEN
-        Todo t1 = new Todo("1", "Desc1", TodoStatus.OPEN.toString());
-        Todo t2 = new Todo("2", "Desc2", TodoStatus.OPEN.toString());
-        Todo t3 = new Todo("3", "Desc3", TodoStatus.OPEN.toString());
+        Todo t1 = new Todo("1", "Desc1", TodoStatus.OPEN);
+        Todo t2 = new Todo("2", "Desc2", TodoStatus.OPEN);
+        Todo t3 = new Todo("3", "Desc3", TodoStatus.OPEN);
         List<Todo> todos = List.of(t1, t2, t3);
         when(todoRepository.findAll()).thenReturn(todos);
 
@@ -39,8 +39,8 @@ class TodoServiceTest {
     @Test
     void addTodo() {
         //GIVEN
-        NewTodo newTodo = new NewTodo("Test-description", "OPEN");
-        Todo todoToSave = new Todo("17", "Test-description", "OPEN");
+        NewTodo newTodo = new NewTodo("Test-description",  TodoStatus.OPEN);
+        Todo todoToSave = new Todo("17", "Test-description", TodoStatus.OPEN);
 
         when(idService.randomId()).thenReturn("17");
         when(todoRepository.save(todoToSave)).thenReturn(todoToSave);
@@ -58,8 +58,8 @@ class TodoServiceTest {
     void updateTodo() {
         //GIVEN
         String id = "123";
-        UpdateTodo todoToUpdate = new UpdateTodo("test-description", "IN_PROGRESS");
-        Todo updatedToDo = new Todo("123", "test-description", "IN_PROGRESS");
+        UpdateTodo todoToUpdate = new UpdateTodo("test-description", TodoStatus.IN_PROGRESS);
+        Todo updatedToDo = new Todo("123", "test-description", TodoStatus.IN_PROGRESS);
 
         //WHEN
         when(todoRepository.save(updatedToDo)).thenReturn(updatedToDo);

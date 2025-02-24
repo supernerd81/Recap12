@@ -1,5 +1,6 @@
 package de.supernerd.recap12.controller;
 
+import de.supernerd.recap12.enums.TodoStatus;
 import de.supernerd.recap12.records.Todo;
 import de.supernerd.recap12.repository.TodoRepository;
 import org.junit.jupiter.api.Test;
@@ -71,7 +72,7 @@ public class TodoControllerIntegrationTest {
     @DirtiesContext
     void putTodo() throws Exception {
         //GIVEN
-        Todo existingTodo = new Todo("1", "test-description", "OPEN");
+        Todo existingTodo = new Todo("1", "test-description", TodoStatus.OPEN);
         todoRepository.save(existingTodo);
 
         //THEN
