@@ -1,6 +1,5 @@
 package de.supernerd.recap12.records;
 
-import de.supernerd.recap12.enums.TodoStatus;
 import lombok.With;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,6 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public record Todo(
         String id,
         String description,
-        TodoStatus status
+        String status
 ) {
 }
