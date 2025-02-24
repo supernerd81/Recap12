@@ -1,6 +1,7 @@
 package de.supernerd.recap12.controller;
 
 import de.supernerd.recap12.records.Todo;
+import de.supernerd.recap12.services.TodoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class TodoController {
+
+    private final TodoService todoService;
 
     @PostMapping("/todo")
     public void save(@RequestBody Todo todo) {
@@ -23,6 +26,7 @@ public class TodoController {
 
     @GetMapping("/todo")
     public List<Todo> findAllTodos() {
-        return null;
+
+        return todoService.findAllTodos();
     }
 }
