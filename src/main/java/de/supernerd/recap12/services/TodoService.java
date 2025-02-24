@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +34,10 @@ public class TodoService {
 
         return todoRepository.save(todoToUpdate);
 
+    }
+
+    public Todo findTodoById(String id) {
+        return todoRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Todo with id: " + id + " not found!"));
     }
 
 }
